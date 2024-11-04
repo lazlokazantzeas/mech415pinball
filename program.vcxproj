@@ -131,8 +131,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Circle Drawing.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Circle Drawing.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="Header.h" />
   </ItemGroup>

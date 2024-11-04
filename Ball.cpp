@@ -17,6 +17,8 @@
 	void Ball::update(float deltaTime) {
 		
 		x += vx * deltaTime;
+
+		vy += -250 * deltaTime; // gravity contribution, should probably make it a constant variable
 		y += vy * deltaTime;
 
 	}
