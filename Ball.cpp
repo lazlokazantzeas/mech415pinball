@@ -9,6 +9,8 @@
 		y = y_initial;
 		vx = vx_initial;
 		vy = vy_initial;
+		ax = 0;
+		ay = -250;
 		radius = r;
 		
 	}
@@ -16,9 +18,10 @@
 
 	void Ball::update(float deltaTime) {
 		
+		vx += ax * deltaTime;
 		x += vx * deltaTime;
 
-		vy += -250 * deltaTime; // gravity contribution, should probably make it a constant variable
+		vy += ay * deltaTime;
 		y += vy * deltaTime;
 
 	}

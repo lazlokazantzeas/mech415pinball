@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cstdio>
 #include <cmath>
@@ -39,13 +38,15 @@ int main()
 		draw_background();
 		draw_stage();
 
+		triangleStage t1(100, 200, 100, 100, 300, 800);
+		circleStage c1(200, 200, 20, 50);
+
 		ball.update(deltaTime); // Update the ball's position
 
 		boundaryCollision(ball, 600, 800); // Handle wall collisions
 
 		draw_sprite(id_ball, ball.x, ball.y, theta, scale); // Sprite takes in ball coordinates
 
-		circle_creator(300, 400, 20, 150);
 
 		update();
 	}
