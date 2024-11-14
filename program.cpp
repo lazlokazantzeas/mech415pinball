@@ -38,8 +38,11 @@ int main()
 		draw_background();
 		draw_stage();
 
-		triangleStage t1(100, 200, 100, 100, 300, 800);
-		circleStage c1(200, 200, 20, 50);
+		triangleStage t1(265-100, 100, 50, 100, 50, 200); // x1,y1,x2,y2,x3,y3
+		triangleStage t2(265+100, 100, 480, 100, 480, 200);
+		circleStage c1(265-140, 650, 20, 35); // center x, y, number points, radius
+		circleStage c2(265+140, 650, 20, 35);
+		circleStage c3(265, 500, 20, 35);
 
 		ball.update(deltaTime); // Update the ball's position
 

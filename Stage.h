@@ -8,7 +8,7 @@ public:
 	int vy1, vy2, vy3; // y coord of vertices for triangular stage elements
 	//static int triangleID;
 
-	triangleStage(int x1, int x2, int x3, int y1, int y2, int y3);
+	triangleStage(int x1, int y1, int x2, int y2, int x3, int y3);
 };
 
 //int triangleStage::triangleID = 0; // ID of triangle stage element, may be useful
@@ -21,7 +21,7 @@ public:
 	int rad; // radius of circlular stage element
 	//static int circleID;
 
-	circleStage::circleStage(int center_x, int center_y, int number_points, int radius);
+	circleStage::circleStage(int center_x, int center_y, int number_points, int radius); // center x, y, number points, radius
 };
 
 //int circleStage::circleID=0; // ID of circle stage element, may be useful

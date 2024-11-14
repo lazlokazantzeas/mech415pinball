@@ -28,3 +28,8 @@ void boundaryCollision(Ball& ball, int screenWidth, int screenHeight) {
 	}
 
 }
+
+//void circleCollisions(Ball& ball) {
+//
+//	
+//}

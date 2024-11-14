@@ -35,7 +35,7 @@ void draw_stage() {
 
 }
 
-triangleStage::triangleStage(int x1, int x2, int x3, int y1, int y2, int y3) {
+triangleStage::triangleStage(int x1, int y1, int x2, int y2, int x3, int y3) {
 	
 	vx1 = x1;
 	vy1 = y1;
