@@ -19,7 +19,7 @@ int main()
 	
 	initialize_graphics();
 
-	Ball ball(400, 300, 0, 1000, 25); // Create a ball
+	Ball ball(360, 300, 0, 750, 25); // Create a ball
 	// ball(x_initial, y_initial, vx_initial, vy_initial, r)
 	
 	double deltaTime = 1.0/60.0; // define timestep to be equal to time per frame
