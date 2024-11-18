@@ -19,7 +19,7 @@ int main()
 	
 	initialize_graphics();
 
-	Ball ball(400, 300, 350, 250, 25); // Create a ball
+	Ball ball(400, 300, 0, 1000, 25); // Create a ball
 	// ball(x_initial, y_initial, vx_initial, vy_initial, r)
 	
 	double deltaTime = 1.0/60.0; // define timestep to be equal to time per frame
@@ -47,6 +47,9 @@ int main()
 		ball.update(deltaTime); // Update the ball's position
 
 		boundaryCollision(ball, 600, 800); // Handle wall collisions
+		circleCollisions(ball, c1);
+		circleCollisions(ball, c2);
+		circleCollisions(ball, c3);
 
 		draw_sprite(id_ball, ball.x, ball.y, theta, scale); // Sprite takes in ball coordinates
 
