@@ -17,3 +17,12 @@ public:
 
 // the car is on fire....
 // and there's no driver at the wheel...
+// the sewers are muddied with a thousand lonely suicides
+// and a dark wind blows
+// the government is corrupt
+// and we're on so many drugs with the curtains drawn 
+// and the radios on
+// we're trapped in the belly of their horribly machine
+// and the machine is bleeding to death
+//
+// 
