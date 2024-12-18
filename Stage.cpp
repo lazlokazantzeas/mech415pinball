@@ -1,7 +1,6 @@
 #include "Stage.h"
 #include <Windows.h> // also needed for the 2D graphics library
 #include "2D_graphics.h" // use the 2D graphics library
-#include "timer.h" // use the time / clock reading function
 #include "Circle Drawing.h"
 
 // Draws a black background
