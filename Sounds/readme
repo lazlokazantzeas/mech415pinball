@@ -1,0 +1,7 @@
+sounds 1-4 are meant to cycle when the ball hits a circle on the stage
+
+sounds 5-6 are meant to trigger when the flippers are used
+
+10-13 are for when the ball collides with the flipper
+
+sound 15 for when we launch the ball with the spacebar
