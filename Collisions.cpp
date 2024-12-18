@@ -135,29 +135,30 @@ void flipperCollision(Ball& ball, Flipper& flipper, bool pivotAtRight) {
 
 
 		// Debug
-		circle_creator(closestX, closestY, 20, 5.0);
+		//circle_creator(closestX, closestY, 20, 5.0);
 	}
 }
 
 // this function allows the ball to get out of its initial channel once it hits the 
 // top right corner triangle
 void initialCollision(Ball& ball) {
-	
+
 	if ((ball.y > 750) && (ball.x > 550)) {
 
+		ball.x = 550;
 		ball.y = 750;
 
-		ball.vx = - 750.0;
-		ball.vy *= - 1.0;
+		ball.vx = ball.vy * -0.707;
+		ball.vy *= 0;
 	}
 }
 
 // this function prevents the ball to go through the wall on the right hand side
 void stageCollisions(Ball& ball) {
-	
-	if ((ball.x + ball.radius > 530) && (ball.x + ball.radius < 550) && 
-		(ball.y - ball.radius < 700)) {
-		
+
+	if ((ball.x + ball.radius > 530) && (ball.x + ball.radius < 550) &&
+		(ball.y - ball.radius < 700) && ball.vx > 0) {
+
 		ball.x = 530 - ball.radius;
 		ball.vx *= -1.0;
 	}

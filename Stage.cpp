@@ -27,7 +27,7 @@ void draw_stage() {
 
 	// draws outline for level, following borders with little launch track on the side
 	// axis of symmetry of playable area is at 530-0/2 = 265px, cy
-	double stage_x[n] = { 0,530,530,550,550,599,599,550,0,0 };
+	double stage_x[n] = { 0,530,530,545,545,599,599,550,0,0 };
 	double stage_y[n] = { 0,0,700,700,0,0,750,799,799,0 };
 	line(stage_x, stage_y, n, r, g, b);
 
@@ -49,7 +49,7 @@ triangleStage::triangleStage(int x1, int y1, int x2, int y2, int x3, int y3) {
 
 	triangle(X, Y, r, g, b);
 
-	//triangleID++;
+	//triangleID++; // Numericizing different stage elements can be useful
 }
 
 circleStage::circleStage(int center_x, int center_y, int number_points, int radius) {

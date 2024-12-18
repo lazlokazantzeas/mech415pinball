@@ -10,7 +10,7 @@
 		vx = vx_initial;
 		vy = vy_initial;
 		ax = 0;
-		ay = -350; // may want to build this into constructor? J - left it floaty for now, easier to see collisions
+		ay = -750; // may want to build this into constructor? J - left it floaty for now, easier to see collisions
 		radius = r;
 		kicked = false;
 		

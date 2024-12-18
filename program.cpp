@@ -18,7 +18,8 @@ int main()
 
 	initialize_graphics();
 
-	Ball ball(574, 25, 0, 0, 25); // Create a ball
+	Ball ball(573, 25, 0, 0, 25); // Create a ball
+	//Ball ball(150, 350, 0, 0, 25); // Create a ball DEBUG
 	// ball(x_initial, y_initial, vx_initial, vy_initial, r)
 
 	double deltaTime = 1.0 / 60.0; // define timestep to be equal to time per frame
@@ -31,8 +32,9 @@ int main()
 
 	create_sprite("green_circle.png", id_ball); // green circle .png must be in project directory duh
 
-	Flipper leftFlipper(75, 250, 175, 45, 45, 10);
-	Flipper rightFlipper(455, 250, 175, 45, 45, 10);
+	// pivot x, pivot y, length, rest angle, max angle, angular speed
+	Flipper leftFlipper(49, 200, 175, 45, 45, 10);
+	Flipper rightFlipper(480, 200, 175, 45, 45, 10);
 
 	while (1) {  // Main game loop infinite loop for test
 
@@ -40,11 +42,13 @@ int main()
 
 		draw_background();
 		draw_stage();
-		triangleStage t1(265 - 100, 100, 50, 100, 50, 200); // x1,y1,x2,y2,x3,y3
-		triangleStage t2(265 + 100, 100, 480, 100, 480, 200);
-		circleStage c1(265 - 140, 650, 20, 35); // center x, y, number points, radius
-		circleStage c2(265 + 140, 650, 20, 35);
-		circleStage c3(265, 500, 20, 35);
+
+		// triangle stage elements not used
+		//triangleStage t1(265 - 100, 100, 50, 100, 50, 200); // x1,y1,x2,y2,x3,y3
+		//triangleStage t2(265 + 100, 100, 480, 100, 480, 200);
+		circleStage c1(265 - 140, 625, 20, 35); // center x, y, number points, radius
+		circleStage c2(265 + 140, 625, 20, 35);
+		circleStage c3(265, 425, 20, 35);
 
 		leftFlipper.update(KEY('Z'), true);
 		rightFlipper.update(KEY('M'), true);
@@ -58,22 +62,11 @@ int main()
 		initialCollision(ball);
 		stageCollisions(ball);
 
-
-
-
-
-
-
 		// Function that launches the ball once the space bar is pressed
 		if (KEY(VK_SPACE) && ball.x > 550) {
-			ball.vy = 1500;
-			ball.ay = -650;
+			ball.vy = 1200;
+			ball.ay = -750;
 		}
-
-
-
-		// Comment out when the GAME OVER function is implemented
-//		boundaryCollision(ball, 600, 800); // Handle wall collisions
 
 		if (circleCollisions(ball, c1)) {
 			points++;
@@ -102,12 +95,16 @@ int main()
 		if (KEY('R')) {
 			ball.x = 574;
 			ball.y = 25;
+			ball.vx = 0;
+			ball.vy = 0;
 
 			points = 0;
 		}
 
 		leftFlipper.draw(false);
 		rightFlipper.draw(true);
+		initialCollision(ball);
+		stageCollisions(ball);
 		draw_sprite(id_ball, ball.x, ball.y, theta, scale); // Sprite takes in ball coordinates
 
 
