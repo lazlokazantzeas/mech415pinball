@@ -5,3 +5,11 @@ sounds 5-6 are meant to trigger when the flippers are used
 10-13 are for when the ball collides with the flipper
 
 sound 15 for when we launch the ball with the spacebar
+
+
+
+i think it would make sense to work on the audio as a class, and keep the main function as clean as possible* 
+
+what i have up is half baked, half tested
+
+no worries if you don't want to work on it
