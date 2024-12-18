@@ -13,16 +13,15 @@ using namespace std;
 
 
 // this program tests the ball and collision features on a 600 wide by 800 tall screen 
-
 int main()
 {
-	
+
 	initialize_graphics();
 
 	Ball ball(574, 25, 0, 0, 25); // Create a ball
 	// ball(x_initial, y_initial, vx_initial, vy_initial, r)
-	
-	double deltaTime = 1.0/60.0; // define timestep to be equal to time per frame
+
+	double deltaTime = 1.0 / 60.0; // define timestep to be equal to time per frame
 
 	int id_ball{};
 	double theta = 0;
@@ -32,8 +31,8 @@ int main()
 
 	create_sprite("green_circle.png", id_ball); // green circle .png must be in project directory duh
 
-	Flipper leftFlipper(75, 250, 175,45,  45, 10);  
-	Flipper rightFlipper(455, 250, 175,45,  45, 10); 
+	Flipper leftFlipper(75, 250, 175, 45, 45, 10);
+	Flipper rightFlipper(455, 250, 175, 45, 45, 10);
 
 	while (1) {  // Main game loop infinite loop for test
 
@@ -41,35 +40,42 @@ int main()
 
 		draw_background();
 		draw_stage();
-
-		leftFlipper.update(KEY('Z'), true);  
-		rightFlipper.update(KEY('M'), true); 
-
-		leftFlipper.draw(false);
-		rightFlipper.draw(true);   
-
-		triangleStage t1(265-100, 100, 50, 100, 50, 200); // x1,y1,x2,y2,x3,y3
-		triangleStage t2(265+100, 100, 480, 100, 480, 200);
-		circleStage c1(265-140, 650, 20, 35); // center x, y, number points, radius
-		circleStage c2(265+140, 650, 20, 35);
+		triangleStage t1(265 - 100, 100, 50, 100, 50, 200); // x1,y1,x2,y2,x3,y3
+		triangleStage t2(265 + 100, 100, 480, 100, 480, 200);
+		circleStage c1(265 - 140, 650, 20, 35); // center x, y, number points, radius
+		circleStage c2(265 + 140, 650, 20, 35);
 		circleStage c3(265, 500, 20, 35);
 
+		leftFlipper.update(KEY('Z'), true);
+		rightFlipper.update(KEY('M'), true);
+
 		ball.update(deltaTime); // Update the ball's position
-		
-		// Function that launches the ball once the space bar is pressed
-		if (KEY(VK_SPACE) && ball.x > 550) {
-	    		ball.vy = 750;
-			ball.ay = -350;
-		}
 
 		// Check ball collisions with flippers
 		flipperCollision(ball, leftFlipper, false);  // Left flipper, pivot at left-most point
 		flipperCollision(ball, rightFlipper, true);  // Right flipper, pivot at right-most point// Pivot at right-most point
 
+		initialCollision(ball);
+		stageCollisions(ball);
+
+
+
+
+
+
+
+		// Function that launches the ball once the space bar is pressed
+		if (KEY(VK_SPACE) && ball.x > 550) {
+			ball.vy = 1500;
+			ball.ay = -650;
+		}
+
+
+
 		// Comment out when the GAME OVER function is implemented
 //		boundaryCollision(ball, 600, 800); // Handle wall collisions
-		
-		if (circleCollisions(ball, c1)){
+
+		if (circleCollisions(ball, c1)) {
 			points++;
 			cout << "Points = " << points << "\n";
 		}
@@ -85,7 +91,7 @@ int main()
 		// Function that ends the game once the the ball touches the lower boundary
 		if (boundaryCollision(ball, 600, 800) && ball.x < 550) {
 			cout << "\n\n GAME OVER -- FINAL SCORE = " << points;
-	
+
 			ball.vx = 0;
 			ball.vy = 0;
 			ball.y = 26;
@@ -100,16 +106,15 @@ int main()
 			points = 0;
 		}
 
-		initialCollision(ball);
-		stageCollisions(ball);
-		
+		leftFlipper.draw(false);
+		rightFlipper.draw(true);
 		draw_sprite(id_ball, ball.x, ball.y, theta, scale); // Sprite takes in ball coordinates
 
 
 		update();
 	}
-	
-		
+
+
 	cout << "\ndone.\n";
 	getchar();
 

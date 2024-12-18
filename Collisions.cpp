@@ -85,11 +85,10 @@ bool circleCollisions(Ball& ball, circleStage& circle) {
 
 
 
-// flipper collisions
 void flipperCollision(Ball& ball, Flipper& flipper, bool pivotAtRight) {
 	const double PI = 3.141592653589793;
 
-	// Calculate the endpoint of the flipper
+
 	double ex, ey;
 	if (pivotAtRight) {
 		ex = flipper.px - flipper.length * cos(-flipper.angle * PI / 180.0);
@@ -100,7 +99,7 @@ void flipperCollision(Ball& ball, Flipper& flipper, bool pivotAtRight) {
 		ey = flipper.py - flipper.length * sin(flipper.angle * PI / 180.0);
 	}
 
-	// Flipper vector
+
 	double fx = ex - flipper.px;
 	double fy = ey - flipper.py;
 	double flipperLengthSquared = fx * fx + fy * fy;
@@ -113,7 +112,7 @@ void flipperCollision(Ball& ball, Flipper& flipper, bool pivotAtRight) {
 	double closestX = flipper.px + t * fx;
 	double closestY = flipper.py + t * fy;
 
-	// Vector from closest point to ball
+	// Vect closest point to ball
 	double distX = ball.x - closestX;
 	double distY = ball.y - closestY;
 	double distance = sqrt(distX * distX + distY * distY);
@@ -124,25 +123,18 @@ void flipperCollision(Ball& ball, Flipper& flipper, bool pivotAtRight) {
 		ball.x += (overlap * distX) / distance;
 		ball.y += (overlap * distY) / distance;
 
-		// Calculate and normalize the normal vector
+		// Calculate and normal vector
 		double normalX = distX / distance;
 		double normalY = distY / distance;
 
-		// Reflect ball velocity
-		const double restitution = 1.2;
+		// Uno reverse card
 		double dotProduct = ball.vx * normalX + ball.vy * normalY;
-		ball.vx -= restitution * dotProduct * normalX;
-		ball.vy -= restitution * dotProduct * normalY;
+		ball.vx -= 2 * dotProduct * normalX;
+		ball.vy -= 2 * dotProduct * normalY;
 
-		// Apply flipper velocity
-		double flipperSpeed = flipper.angularSpeed * (PI / 180.0) * flipper.length;
-		double flipperKickX = flipperSpeed * normalY * (pivotAtRight ? -1.0 : 1.0);
-		double flipperKickY = -flipperSpeed * normalX * (pivotAtRight ? -1.0 : 1.0);
 
-		ball.vx += flipperKickX;
-		ball.vy += flipperKickY;
 
-		// Debug: Visualize closest point
+		// Debug
 		circle_creator(closestX, closestY, 20, 5.0);
 	}
 }
