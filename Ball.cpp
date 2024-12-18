@@ -12,11 +12,12 @@
 		ax = 0;
 		ay = -350; // may want to build this into constructor? J - left it floaty for now, easier to see collisions
 		radius = r;
+		kicked = false;
 		
 	}
 
 
-	void Ball::update(float deltaTime) {
+	void Ball::update(double deltaTime) {
 		
 		vx += ax * deltaTime;
 		x += vx * deltaTime;

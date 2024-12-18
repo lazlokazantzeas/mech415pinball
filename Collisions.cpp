@@ -1,12 +1,17 @@
 // Source code for all collision related functions
-
+#define NOMINMAX
 #include "Collisions.h"
+#include "Flipper.h"
 #include <iostream>
 #include <cstdio>
 #include <windows.h>
 #include <cmath>
+#include <algorithm>
+#include "Circle Drawing.h"
 
 using namespace std;
+
+const double PI = 3.141592653589793;
 
 void boundaryCollision(Ball& ball, int screenWidth, int screenHeight) {
 
@@ -68,5 +73,69 @@ void circleCollisions(Ball& ball, circleStage& circle) {
 		// normal projects it back into x,y-space
 		ball.vx = ball.vx - 2 * (dpNormal) * normal_x;
 		ball.vy = ball.vy - 2 * (dpNormal) * normal_y;
+	}
+}
+
+
+
+// flipper collisions
+void flipperCollision(Ball& ball, Flipper& flipper, bool pivotAtRight) {
+	const double PI = 3.141592653589793;
+
+	// Calculate the endpoint of the flipper
+	double ex, ey;
+	if (pivotAtRight) {
+		ex = flipper.px - flipper.length * cos(-flipper.angle * PI / 180.0);
+		ey = flipper.py + flipper.length * sin(-flipper.angle * PI / 180.0);
+	}
+	else {
+		ex = flipper.px + flipper.length * cos(flipper.angle * PI / 180.0);
+		ey = flipper.py - flipper.length * sin(flipper.angle * PI / 180.0);
+	}
+
+	// Flipper vector
+	double fx = ex - flipper.px;
+	double fy = ey - flipper.py;
+	double flipperLengthSquared = fx * fx + fy * fy;
+
+	// Project ball center onto flipper line
+	double t = ((ball.x - flipper.px) * fx + (ball.y - flipper.py) * fy) / flipperLengthSquared;
+	t = max(0.0, min(1.0, t));
+
+	// Closest point on flipper
+	double closestX = flipper.px + t * fx;
+	double closestY = flipper.py + t * fy;
+
+	// Vector from closest point to ball
+	double distX = ball.x - closestX;
+	double distY = ball.y - closestY;
+	double distance = sqrt(distX * distX + distY * distY);
+
+	if (distance < ball.radius) {
+		// Resolve overlap
+		double overlap = ball.radius - distance;
+		ball.x += (overlap * distX) / distance;
+		ball.y += (overlap * distY) / distance;
+
+		// Calculate and normalize the normal vector
+		double normalX = distX / distance;
+		double normalY = distY / distance;
+
+		// Reflect ball velocity
+		const double restitution = 1.2;
+		double dotProduct = ball.vx * normalX + ball.vy * normalY;
+		ball.vx -= restitution * dotProduct * normalX;
+		ball.vy -= restitution * dotProduct * normalY;
+
+		// Apply flipper velocity
+		double flipperSpeed = flipper.angularSpeed * (PI / 180.0) * flipper.length;
+		double flipperKickX = flipperSpeed * normalY * (pivotAtRight ? -1.0 : 1.0);
+		double flipperKickY = -flipperSpeed * normalX * (pivotAtRight ? -1.0 : 1.0);
+
+		ball.vx += flipperKickX;
+		ball.vy += flipperKickY;
+
+		// Debug: Visualize closest point
+		circle_creator(closestX, closestY, 20, 5.0);
 	}
 }

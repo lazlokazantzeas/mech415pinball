@@ -8,6 +8,7 @@
 #include "Collisions.h" // Collision related functions
 #include "Stage.h"
 #include "Circle Drawing.h"
+#include "Flipper.h"
 
 using namespace std;
 
@@ -30,6 +31,8 @@ int main()
 
 	create_sprite("green_circle.png", id_ball); // green circle .png must be in project directory duh
 
+	Flipper leftFlipper(75, 250, 175,45,  45, 10);  
+	Flipper rightFlipper(455, 250, 175,45,  45, 10); 
 
 	while (1) {  // Main game loop infinite loop for test
 
@@ -38,6 +41,14 @@ int main()
 		draw_background();
 		draw_stage();
 
+		leftFlipper.update(KEY('Z'), true);  
+		rightFlipper.update(KEY('M'), true); 
+
+		leftFlipper.draw(false);
+		rightFlipper.draw(true);   
+		
+		
+
 		triangleStage t1(265-100, 100, 50, 100, 50, 200); // x1,y1,x2,y2,x3,y3
 		triangleStage t2(265+100, 100, 480, 100, 480, 200);
 		circleStage c1(265-140, 650, 20, 35); // center x, y, number points, radius
@@ -45,6 +56,10 @@ int main()
 		circleStage c3(265, 500, 20, 35);
 
 		ball.update(deltaTime); // Update the ball's position
+
+		// Check ball collisions with flippers
+		flipperCollision(ball, leftFlipper, false);  // Left flipper, pivot at left-most point
+		flipperCollision(ball, rightFlipper, true);  // Right flipper, pivot at right-most point// Pivot at right-most point
 
 		boundaryCollision(ball, 600, 800); // Handle wall collisions
 		circleCollisions(ball, c1);
