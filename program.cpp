@@ -57,7 +57,7 @@ int main()
 		ball.update(deltaTime); // Update the ball's position
 		
 		// Function that launches the ball once the space bar is pressed
-		if (KEY(VK_SPACE)) {
+		if (KEY(VK_SPACE) && ball.x > 550) {
 	    		ball.vy = 750;
 			ball.ay = -350;
 		}
@@ -66,7 +66,8 @@ int main()
 		flipperCollision(ball, leftFlipper, false);  // Left flipper, pivot at left-most point
 		flipperCollision(ball, rightFlipper, true);  // Right flipper, pivot at right-most point// Pivot at right-most point
 
-		boundaryCollision(ball, 600, 800); // Handle wall collisions
+		// Comment out when the GAME OVER function is implemented
+//		boundaryCollision(ball, 600, 800); // Handle wall collisions
 		
 		if (circleCollisions(ball, c1)){
 			points++;
@@ -82,12 +83,22 @@ int main()
 		}
 
 		// Function that ends the game once the the ball touches the lower boundary
-		/*
-		if (boundaryCollision(ball, 600, 800)) {
+		if (boundaryCollision(ball, 600, 800) && ball.x < 550) {
 			cout << "\n\n GAME OVER -- FINAL SCORE = " << points;
-			return 0;
+	
+			ball.vx = 0;
+			ball.vy = 0;
+			ball.y = 26;
+			ball.ay = 0;
 		}
-		*/
+
+		// Function that allows the ball to be reset to its initial position
+		if (KEY('R')) {
+			ball.x = 574;
+			ball.y = 25;
+
+			points = 0;
+		}
 
 		initialCollision(ball);
 		stageCollisions(ball);
