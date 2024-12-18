@@ -133,6 +133,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Circle Drawing.cpp" />
     <ClCompile Include="Collisions.cpp" />
+    <ClCompile Include="Flipper.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="timer.cpp" />
@@ -144,7 +145,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Circle Drawing.h" />
     <ClInclude Include="Collisions.h" />
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="Flipper.h" />
     <ClInclude Include="Stage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
