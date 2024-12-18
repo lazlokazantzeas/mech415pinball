@@ -36,6 +36,12 @@ int main()
 	Flipper leftFlipper(49, 200, 175, 45, 45, 10);
 	Flipper rightFlipper(480, 200, 175, 45, 45, 10);
 
+	// Print out message for user to know the controls of the game
+	cout << "\nPress Space Bar to Start\n";
+	cout << "\nUse key M to activate RIGHT flipper";
+	cout << "\nUse key Z to activate LEFT flipper";
+	cout << "\nPress key R to restart the game\n\n";
+
 	while (1) {  // Main game loop infinite loop for test
 
 		clear();
